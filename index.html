@@ -3,9 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tic Tac Toe</title>
+    <title>Tic-Tac-Toe</title>
+    <link rel="icon" type="image/x-icon" href="./src/logo.png" />
     <link rel="stylesheet" href="./src/style.css" />
-    <script src="./src/app.js"></script>
+    <script defer src="./src/app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <img src="./src/logo.png" class="header--logo" alt="Tic Tac Toe Logo" />
+      <h1 class="header--title">Tic-Tac-Toe</h1>
+    </header>
+    <section class="gameboard--wrapper">
+      <div class="gameboard--cell cell--0" data-index="0"></div>
+      <div class="gameboard--cell cell--1" data-index="1"></div>
+      <div class="gameboard--cell cell--2" data-index="2"></div>
+      <div class="gameboard--cell cell--3" data-index="3"></div>
+      <div class="gameboard--cell cell--4" data-index="4"></div>
+      <div class="gameboard--cell cell--5" data-index="5"></div>
+      <div class="gameboard--cell cell--6" data-index="6"></div>
+      <div class="gameboard--cell cell--7" data-index="7"></div>
+      <div class="gameboard--cell cell--8" data-index="8"></div>
+    </section>
+    <footer>Made with ♥️ by Aram Hekimian</footer>
+  </body>
 </html>

@@ -1,1 +1,63 @@
+* {
+  margin: 0;
+}
 
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito", sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 100px;
+}
+
+.header--logo {
+  width: 100px;
+}
+
+.header--title {
+  font-size: 2.7em;
+  color: #ff8442;
+}
+
+.gameboard--wrapper {
+  height: 70vh;
+  width: 70vw;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4px;
+  background-color: black;
+}
+
+.gameboard--cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6em;
+  font-weight: bold;
+  color: rgba(255, 132, 66);
+  cursor: pointer;
+  background-color: white;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
