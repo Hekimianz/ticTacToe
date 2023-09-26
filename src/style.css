@@ -54,6 +54,19 @@ header {
   background-color: white;
 }
 
+.win--wrapper {
+  background-color: #ff8442;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 300px;
+  color: white;
+  position: absolute;
+  font-size: 2em;
+  border-radius: 16px;
+  display: none;
+}
+
 footer {
   position: fixed;
   left: 0;
