@@ -63,8 +63,27 @@ header {
   color: white;
   position: absolute;
   font-size: 2em;
+  font-weight: bold;
   border-radius: 16px;
   display: none;
+  flex-direction: column;
+}
+
+.win--restart {
+  margin-top: 10px;
+  background-color: transparent;
+  border: 3px solid rgb(66, 34, 0);
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: rgb(84, 43, 0);
+  transition: 0.2s all;
+}
+
+.win--restart:hover {
+  color: rgb(255, 222, 195);
+  border-color: rgb(255, 222, 195);
+  transform: scale(1.05);
 }
 
 footer {

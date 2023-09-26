@@ -7,7 +7,8 @@ const gameBoard = (() => {
 // Players
 const Player = (mark) => {
   const playerMark = mark;
-  return { playerMark };
+  let winner = false;
+  return { playerMark, winner };
 };
 
 const player1 = Player("X");
@@ -29,6 +30,12 @@ const gameController = (() => {
       console.log("Win!");
       cells.forEach((cell) => (cell.style.pointerEvents = "none"));
       winnerDisp.style.display = "flex";
+      const winnerMark = board[0];
+      if (winnerMark === "X") player1.winner = true;
+      if (winnerMark === "O") player2.winner = true;
+      winnerDisp.querySelector(".win--title").innerHTML = `${
+        winnerMark === "X" ? "X Wins!" : "O Wins!"
+      }`;
     }
   };
   // Place markers and switch turns
@@ -57,6 +64,20 @@ const gameController = (() => {
       checkWin(diag1);
       checkWin(diag2);
     });
+    // Restart game
+    const restartGame = () => {
+      gameBoard.forEach((cell, i) => {
+        gameBoard[i] = "";
+      });
+      gameController.renderCells();
+      player1.winner = false;
+      player2.winner = false;
+      document.querySelector(".win--wrapper").style.display = "none";
+      cells.forEach((cell) => (cell.style.pointerEvents = "auto"));
+      currentPlayer = player1;
+    };
+    const restartBtn = document.querySelector(".win--restart");
+    restartBtn.addEventListener("click", restartGame);
   });
 
   return { renderCells };
