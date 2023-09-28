@@ -33,10 +33,42 @@ header {
   color: #ff8442;
 }
 
+.chooseMarker--wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chooseMarker--title {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.chooseMarker--X,
+.chooseMarker--O {
+  width: 100px;
+  cursor: pointer;
+  transition: 0.2s all;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 16px;
+}
+
+.chooseMarker--O:hover,
+.chooseMarker--X:hover {
+  transform: scale(1.1);
+  background-color: #fff2ec;
+}
+
+.chooseMarker--O {
+  margin-left: 15px;
+}
+
 .gameboard--wrapper {
   height: 70vh;
   width: 70vw;
-  display: grid;
+  display: none;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 4px;

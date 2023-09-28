@@ -11,13 +11,35 @@ const Player = (mark) => {
   return { playerMark, winner };
 };
 
-const player1 = Player("X");
-const player2 = Player("O");
-
 // Game Controller
 const gameController = (() => {
+  // Start game
+  const board = document.querySelector(".gameboard--wrapper");
+  const chooseMarkerBtns = document.querySelectorAll(".chooseMarker");
+  const markerWrapper = document.querySelector(".chooseMarker--wrapper");
+  let chosenMarker;
+  let player1;
+  let player2;
+  let currentPlayer;
+  chooseMarkerBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      board.style.display = "grid";
+      markerWrapper.style.display = "none";
+      if (btn.dataset.marker === "X") {
+        player1 = Player("X");
+        player2 = Player("O");
+        currentPlayer = player1;
+        chosenMarker = "X";
+      } else {
+        player1 = Player("O");
+        player2 = Player("X");
+        currentPlayer = player1;
+        chosenMarker = "O";
+      }
+      console.log(player1, player2);
+    });
+  });
   const cells = document.querySelectorAll(".gameboard--cell");
-  let currentPlayer = player1;
   const renderCells = () => {
     cells.forEach((cell, i) => {
       cell.innerHTML = gameBoard[i];
@@ -42,7 +64,9 @@ const gameController = (() => {
   cells.forEach((cell, i) => {
     cell.addEventListener("click", () => {
       // if (cell.innerHTML !== "") return;
+      console.log(currentPlayer);
       gameBoard[i] = currentPlayer.playerMark;
+
       renderCells();
       currentPlayer == player1
         ? (currentPlayer = player2)
