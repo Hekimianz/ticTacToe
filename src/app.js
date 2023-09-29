@@ -60,8 +60,20 @@ const gameController = (() => {
     }
   };
 
+  // Check for draw
+  const checkDraw = () => {
+    const winnerDisp = document.querySelector(".win--wrapper");
+    if (gameBoard.every((v) => v !== "")) {
+      winnerDisp.style.display = "flex";
+      winnerDisp.querySelector(".win--title").innerHTML = "Draw!";
+    }
+  };
+
   // Check wins
   const checkAllWins = () => {
+    if (gameBoard.every((v) => v !== "")) {
+      checkDraw();
+    }
     checkWin(gameBoard.slice(0, 3));
     checkWin(gameBoard.slice(3, 6));
     checkWin(gameBoard.slice(6, 9));
@@ -74,7 +86,6 @@ const gameController = (() => {
     const diag1 = gameBoard.filter((el, i) => i === 0 || i === 4 || i === 8);
     const diag2 = gameBoard.filter((el, i) => i === 6 || i === 4 || i === 2);
     checkWin(diag1);
-    checkWin(diag2);
   };
 
   // CPU Turn
