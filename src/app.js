@@ -1,17 +1,17 @@
-// Gameboard
+// Gameboard module
 const gameBoard = (() => {
   let board = ["", "", "", "", "", "", "", "", ""];
   return board;
 })();
 
-// Players
+// Players factory
 const Player = (mark) => {
   const playerMark = mark;
   let winner = false;
   return { playerMark, winner };
 };
 
-// Game Controller
+// Game Controller module
 const gameController = (() => {
   // Start game
   const board = document.querySelector(".gameboard--wrapper");
@@ -36,7 +36,6 @@ const gameController = (() => {
         currentPlayer = player1;
         chosenMarker = "O";
       }
-      console.log(player1, player2);
     });
   });
   const cells = document.querySelectorAll(".gameboard--cell");
@@ -45,11 +44,11 @@ const gameController = (() => {
       cell.innerHTML = gameBoard[i];
     });
   };
+
   // Check for win func
   const checkWin = (board) => {
     const winnerDisp = document.querySelector(".win--wrapper");
     if (board.every((v) => v === board[0] && v !== "")) {
-      console.log("Win!");
       cells.forEach((cell) => (cell.style.pointerEvents = "none"));
       winnerDisp.style.display = "flex";
       const winnerMark = board[0];
@@ -60,34 +59,55 @@ const gameController = (() => {
       }`;
     }
   };
+
+  // Check wins
+  const checkAllWins = () => {
+    checkWin(gameBoard.slice(0, 3));
+    checkWin(gameBoard.slice(3, 6));
+    checkWin(gameBoard.slice(6, 9));
+    const col1 = gameBoard.filter((el, i) => i === 0 || i === 3 || i === 6);
+    const col2 = gameBoard.filter((el, i) => i === 1 || i === 4 || i === 7);
+    const col3 = gameBoard.filter((el, i) => i === 2 || i === 5 || i === 8);
+    checkWin(col1);
+    checkWin(col2);
+    checkWin(col3);
+    const diag1 = gameBoard.filter((el, i) => i === 0 || i === 4 || i === 8);
+    const diag2 = gameBoard.filter((el, i) => i === 6 || i === 4 || i === 2);
+    checkWin(diag1);
+    checkWin(diag2);
+  };
+
+  // CPU Turn
+  const cpuTurn = () => {
+    let finalEl;
+    let empties = [];
+    gameBoard.forEach((el, i) => {
+      if (el === "") {
+        empties.push(i);
+      }
+      const length = empties.length;
+      let random = Math.floor(Math.random() * length);
+      finalEl = empties[random];
+    });
+    gameBoard[finalEl] = player2.playerMark;
+    renderCells();
+    checkAllWins();
+  };
+
   // Place markers and switch turns
   cells.forEach((cell, i) => {
     cell.addEventListener("click", () => {
-      // if (cell.innerHTML !== "") return;
-      console.log(currentPlayer);
-      gameBoard[i] = currentPlayer.playerMark;
-
+      if (cell.innerHTML !== "") return;
+      gameBoard[i] = player1.playerMark;
       renderCells();
-      currentPlayer == player1
-        ? (currentPlayer = player2)
-        : (currentPlayer = player1);
-      // Check for horizontal wins
-      checkWin(gameBoard.slice(0, 3));
-      checkWin(gameBoard.slice(3, 6));
-      checkWin(gameBoard.slice(6, 9));
-      // Check for vertical wins
-      const col1 = gameBoard.filter((el, i) => i === 0 || i === 3 || i === 6);
-      const col2 = gameBoard.filter((el, i) => i === 1 || i === 4 || i === 7);
-      const col3 = gameBoard.filter((el, i) => i === 2 || i === 5 || i === 8);
-      checkWin(col1);
-      checkWin(col2);
-      checkWin(col3);
-      // Check for diagonal win
-      const diag1 = gameBoard.filter((el, i) => i === 0 || i === 4 || i === 8);
-      const diag2 = gameBoard.filter((el, i) => i === 6 || i === 4 || i === 2);
-      checkWin(diag1);
-      checkWin(diag2);
+      checkAllWins();
+
+      // CPU Turn
+      board.style.pointerEvents = "none";
+      setTimeout(cpuTurn, 500);
+      setTimeout(() => (board.style.pointerEvents = "auto"), 500);
     });
+
     // Restart game
     const restartGame = () => {
       gameBoard.forEach((cell, i) => {
@@ -103,8 +123,5 @@ const gameController = (() => {
     const restartBtn = document.querySelector(".win--restart");
     restartBtn.addEventListener("click", restartGame);
   });
-
   return { renderCells };
 })();
-
-gameController.renderCells();

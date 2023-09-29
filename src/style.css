@@ -84,6 +84,7 @@ header {
   color: rgba(255, 132, 66);
   cursor: pointer;
   background-color: white;
+  transition: 1s all;
 }
 
 .win--wrapper {
